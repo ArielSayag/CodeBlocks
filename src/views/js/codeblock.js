@@ -45,15 +45,8 @@ document.addEventListener("DOMContentLoaded", async function () {
             break;
           case "CODE_UPDATE":
               if(data !== question.solution) {
-                if(codeDisplay){
-                  codeDisplay.style.backgroundColor='#FA8072';
-                  setTimeout(function() {
-                    codeDisplay.style.backgroundColor = 'initial';
-                  }, 10000); 
-                }
                 alert("Student has wrong answer")
               }else {
-                codeDisplay.style.backgroundColor='#98FB98';
                 alert("Student has correct answer")
               }
               codeBlock.textContent = data.code;
@@ -82,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       if(codeBlock.value === question.solution) {
         document.getElementById("model").classList.add("open");
        } else {
-        
+        alert('Try again')
 
         attempts.push(codeBlock.value)
         return;
