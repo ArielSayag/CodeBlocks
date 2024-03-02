@@ -33,7 +33,11 @@ document.addEventListener("DOMContentLoaded", async function () {
       webSocket.send(`JOIN_ROOM:${question._id}`)
     })
     webSocket.addEventListener('close', () => {
-      webSocket.send(`LEAVE_ROOM:${question._id}`)
+      try{
+        webSocket.send(`LEAVE_ROOM:${question._id}`)
+      }catch(e){
+        console.log(e)
+      }
     })
     webSocket.addEventListener('message', message => {
         const [cmd, data] = message.data.split(':')
@@ -71,8 +75,13 @@ document.addEventListener("DOMContentLoaded", async function () {
      // update btn
      btn.addEventListener('click',function(){
       if(isMentor) return;
-      webSocket.send(`CODE_UPDATE:${codeBlock.value}`)
-      
+      try{
+        webSocket.send(`CODE_UPDATE:${codeBlock.value}`)
+
+      }catch(e){
+        console.log(e)
+      }
+
       if(codeBlock.value === question.solution) {
         document.getElementById("model").classList.add("open");
        } else {
