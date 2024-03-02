@@ -1,0 +1,92 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+  /* background-image: url(https://www.ppt-backgrounds.net/large/confetti-imagebasket-clipart-slides.jpg); */
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: #333;
+  /* background-color: #f0f0f0; */
+  
+}
+
+.code-block {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2{
+  align-self: center;
+}
+
+
+textarea{
+  margin-bottom: 15px;
+  max-width: 800px;
+  height: 100px;
+  max-height: 100px;
+}
+
+button{
+  width: 30%;
+  align-self: center;
+  margin: 5px 0;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd; 
+  padding: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:not([disabled]):hover{
+  background-color: #f0f0f0;
+}
+
+#model{
+  display: none; 
+  flex-direction: column;
+  text-align: center;
+  position: fixed; 
+  z-index: 1; 
+  left: 13%;
+  top: 12%;
+  width: 73%;
+  height: 78%;
+  overflow: hidden;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid lightblue;
+  padding: 5px;
+        
+}
+
+#model.open{
+  display: flex;
+}
+
+#model img{
+  height: 300px;
+  width: 300px;
+  align-self: center;
+}
+
+#model p{
+  align-self: center;
+  color: green;
+  font-size: large;
+  font-weight: bold;
+  padding: 0;
+}
