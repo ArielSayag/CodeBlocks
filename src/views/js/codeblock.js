@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const codeDisplay = document.getElementById('codeDisplay');
     codeBlock.addEventListener('input', function() {
       const code = codeBlock.value;
-      // Highlight the code using Highlight.js and update the display
+      //using Highlight.js
       codeDisplay.innerHTML = hljs.highlightAuto(code).value;
     });
 
@@ -45,11 +45,15 @@ document.addEventListener("DOMContentLoaded", async function () {
             break;
           case "CODE_UPDATE":
               if(data !== question.solution) {
-                // highlight the code in red maybe for the mentor
-                
-                // indicate the student has wrong answer
+                if(codeDisplay){
+                  codeDisplay.style.backgroundColor='#FA8072';
+                  setTimeout(function() {
+                    codeDisplay.style.backgroundColor = 'initial';
+                  }, 10000); 
+                }
                 alert("Student has wrong answer")
               }else {
+                codeDisplay.style.backgroundColor='#98FB98';
                 alert("Student has correct answer")
               }
               codeBlock.textContent = data.code;
