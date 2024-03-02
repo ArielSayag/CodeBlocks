@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         finalSolution: question.solution
       }
 
-      fetch(`https://codeblocks-production.up.railway.app//question`,{
+      fetch(`https://codeblocks-production.up.railway.app/question`,{
         method:'post',
         headers: {
           'Content-Type': 'application/json'
