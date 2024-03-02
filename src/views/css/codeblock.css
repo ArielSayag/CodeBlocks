@@ -78,10 +78,10 @@ button:not([disabled]):hover{
   text-align: center;
   position: fixed; 
   z-index: 1; 
-  left: 25%;
-  top: 23%;
-  width: 46%;
-  height: 27%;
+  left: 11%;
+  top: 14%;
+  width: 78%;
+  height: 73%;
   overflow: hidden;
   background-color: #fff;
   border-radius: 5px;
