@@ -75,9 +75,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       if(codeBlock.value === question.solution) {
         document.getElementById("model").classList.add("open");
        } else {
-        alert('Try again')
-
         attempts.push(codeBlock.value)
+        document.getElementById("model-try-again").classList.add("open");
         return;
       }
       question.code = codeBlock.value;
@@ -111,5 +110,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       closeBtn.addEventListener('click',function(){
         document.getElementById("model").classList.remove("open");
+        document.getElementById("model-try-again").classList.remove("open");
       })
   });

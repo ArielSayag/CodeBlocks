@@ -48,15 +48,17 @@ app.get("/question/:id", async (req,res) => {
 })
 
 // update code by student 
+        
 app.post("/question", async (req,res)=>{
   try{
     const updateCode = req.body;
+    console.log(req)
     const updatedData = await CodeSolution.create(updateCode)
     if (!updatedData) {
       return res.status(404).json({ message: 'Data not found' });
     }
     res.json(updatedData);
-
+    return true
   }catch(e){
     console.error(err);
   }

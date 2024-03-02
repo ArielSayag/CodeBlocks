@@ -55,7 +55,7 @@ button:not([disabled]):hover{
   background-color: #f0f0f0;
 }
 
-#model{
+#model,#model-try-again{
   display: none; 
   flex-direction: column;
   text-align: center;
@@ -72,7 +72,7 @@ button:not([disabled]):hover{
   padding: 5px;
         
 }
-
+#model-try-again.open,
 #model.open{
   display: flex;
 }
@@ -82,7 +82,13 @@ button:not([disabled]):hover{
   width: 300px;
   align-self: center;
 }
-
+#model-try-again p{
+  align-self: center;
+  color: lightsalmon;
+  font-size: large;
+  font-weight: bold;
+  padding: 0;
+}
 #model p{
   align-self: center;
   color: green;
