@@ -72,14 +72,15 @@ document.addEventListener("DOMContentLoaded", async function () {
      btn.addEventListener('click',function(){
       if(isMentor) return;
       webSocket.send(`CODE_UPDATE:${codeBlock.value}`)
+      
       if(codeBlock.value === question.solution) {
         document.getElementById("model").classList.add("open");
        } else {
-        attempts.push(codeBlock.value)
-        document.getElementById("model-try-again").classList.add("open");
-        return;
+         document.getElementById("model-try-again").classList.add("open");
+         attempts.push(codeBlock.value)
       }
       question.code = codeBlock.value;
+
       const updateData = {
         question: questionId,
         solutionSet: attempts,
@@ -100,7 +101,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         return res.json();
       })
       .catch(error => {
-        console.error('There was a problem with the PUT request:', error);
+        console.error('There was a problem with the POST request:', error);
       });
 
      })
