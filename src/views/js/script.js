@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const titlesUl=document.getElementById("codeTitlesList")
 
   try {
-   const questions = await fetch("https://codeblocks-production.up.railway.app/questions", {
+    const questions = await fetch("https://codeblocks-production.up.railway.app/questions", {
       headers: {
         'Content-Type': "application/json"
       }
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       ${item.title}
       </a>
       `
-      // <i class="fas fa-code icon"></i>
+    
       titlesUl.appendChild(li);
     });
   

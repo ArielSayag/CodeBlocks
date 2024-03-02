@@ -12,13 +12,22 @@ document.addEventListener("DOMContentLoaded", async function () {
       return;
     }
 
+    // const question = await fetch(`https://localhost:3000/question/${questionId}`, { headers: {'Content-Type': 'application/json'}})
     const question = await fetch(`https://codeblocks-production.up.railway.app/question/${questionId}`, { headers: {'Content-Type': 'application/json'}})
     .then(res => res.json())
     
     const webSocket = new WebSocket("wss://codeblocks-production.up.railway.app/")
+   
     
     document.getElementById("title").textContent = question.title; 
-    codeBlock.value = question.code
+    codeBlock.value = question.code;
+
+    const codeDisplay = document.getElementById('codeDisplay');
+    codeBlock.addEventListener('input', function() {
+      const code = codeBlock.value;
+      // Highlight the code using Highlight.js and update the display
+      codeDisplay.innerHTML = hljs.highlightAuto(code).value;
+    });
 
     webSocket.addEventListener('open', () => {
       webSocket.send(`JOIN_ROOM:${question._id}`)
@@ -37,13 +46,13 @@ document.addEventListener("DOMContentLoaded", async function () {
           case "CODE_UPDATE":
               if(data !== question.solution) {
                 // highlight the code in red maybe for the mentor
+                
                 // indicate the student has wrong answer
                 alert("Student has wrong answer")
               }else {
                 alert("Student has correct answer")
               }
               codeBlock.textContent = data.code;
-              // hljs.highlightBlock(codeBlock); 
               break;   
           case "STUDENT_LEAVE": // mentor receives
               break;  
@@ -69,7 +78,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       if(codeBlock.value === question.solution) {
         document.getElementById("model").classList.add("open");
        } else {
-        // ERROR ? maybe inform the user?
+        
 
         attempts.push(codeBlock.value)
         return;
