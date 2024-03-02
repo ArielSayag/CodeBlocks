@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const question = await fetch(`https://codeblocks-production.up.railway.app/question/${questionId}`, { headers: {'Content-Type': 'application/json'}})
     .then(res => res.json())
     
-    const webSocket = new WebSocket("wss://codeblocks-production.up.railway.app/")
+    const webSocket = new WebSocket("ws://codeblocks-production.up.railway.app/")
     
     document.getElementById("title").textContent = question.title; 
     codeBlock.value = question.code
