@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const titlesUl=document.getElementById("codeTitlesList")
 
   try {
-   const questions = await fetch("http://localhost:3000/questions", {
+   const questions = await fetch("https://codeblocks-production.up.railway.app/questions", {
       headers: {
         'Content-Type': "application/json"
       }
