@@ -106,10 +106,13 @@ document.addEventListener("DOMContentLoaded", async function () {
      })
 
      //close model
-      const closeBtn=document.getElementById("close-model")
+      const closeBtn=document.getElementById("close-model");
+      const closetryBtn=document.getElementById("close-model-try");
 
       closeBtn.addEventListener('click',function(){
         document.getElementById("model").classList.remove("open");
+      })
+      closetryBtn.addEventListener('click',function(){
         document.getElementById("model-try-again").classList.remove("open");
       })
   });
