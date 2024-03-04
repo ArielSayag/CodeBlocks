@@ -1,9 +1,14 @@
 const express = require('express');
 const http = require('http');
 const path = require('path');
-const fs = require('fs').promises;
 const dotenv = require('dotenv')
-dotenv.config()
+const envFile = process.env.NODE_ENV === 'production' ? '.env' : '.env.development'
+
+dotenv.config({
+  path: path.resolve(__dirname, '..', envFile)
+});
+
+
 const cors = require('cors')
 const app = express();
 const port = process.env.PORT || 80

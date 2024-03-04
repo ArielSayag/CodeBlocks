@@ -1,4 +1,14 @@
 
+
+ function notify(text, status = "success") {
+                  new Notify ({
+                    title: "Code Blocks",
+                    text: text,
+                    autoclose: true,
+                    status:status, 
+                    autotimeout: 3000
+                })
+}
 document.addEventListener("DOMContentLoaded", async function () {
     let isMentor = false;
     const codeBlock = document.getElementById('codeInput');
@@ -13,7 +23,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     // const question = await fetch(`https://localhost:3000/question/${questionId}`, { headers: {'Content-Type': 'application/json'}})
-    const question = await fetch(`https://codeblocks-production.up.railway.app/question/${questionId}`, { headers: {'Content-Type': 'application/json'}})
+    const question = await fetch(`https://codeblocks-production.up.railway.app/question/${questionId}`, 
+    { headers: {'Content-Type': 'application/json'}})
     .then(res => res.json())
     
     const webSocket = new WebSocket("wss://codeblocks-production.up.railway.app/")
@@ -32,13 +43,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     webSocket.addEventListener('open', () => {
       webSocket.send(`JOIN_ROOM:${question._id}`)
     })
+
     webSocket.addEventListener('close', () => {
       try{
         webSocket.send(`LEAVE_ROOM:${question._id}`)
-      }catch(e){
+      } catch(e){
         console.log(e)
       }
     })
+
     webSocket.addEventListener('message', message => {
         const [cmd, data] = message.data.split(':')
         console.log(`Command: ${cmd}, Data: ${data}`)
@@ -49,31 +62,30 @@ document.addEventListener("DOMContentLoaded", async function () {
             break;
           case "CODE_UPDATE":
               if(data !== question.solution) {
-                alert("Student has wrong answer")
-              }else {
-                alert("Student has correct answer")
+                notify("Student has wrong answer", "error")
+              } else {
+                notify("Student has correct answer")
               }
-              codeBlock.textContent = data.code;
+              codeBlock.value = data;
               break;   
           case "STUDENT_LEAVE": // mentor receives
               break;  
           case "STUDENT_JOIN": // mentor receives
               break;  
           case "ROOM_FULL": 
-              alert("This room is full")
+              notify("This room is full", "info")
               window.location.href = "/index.html"
               break;   
           case "CLOSE_ROOM":
-              alert("Room closed")
+              notify("Room closed", "info")
               window.location.href = "/index.html"
               break;    
         }
      })
 
-
      let attempts = []
      // update btn
-     btn.addEventListener('click',function(){
+     btn.addEventListener('click', function(){
       if(isMentor) return;
       try{
         webSocket.send(`CODE_UPDATE:${codeBlock.value}`)
@@ -88,6 +100,7 @@ document.addEventListener("DOMContentLoaded", async function () {
          document.getElementById("model-try-again").classList.add("open");
          attempts.push(codeBlock.value)
       }
+
       question.code = codeBlock.value;
 
       const updateData = {
@@ -112,7 +125,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       .catch(error => {
         console.error('There was a problem with the POST request:', error);
       });
-
      })
 
      //close model
